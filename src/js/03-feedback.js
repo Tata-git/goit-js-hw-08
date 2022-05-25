@@ -27,32 +27,33 @@ function onTextareaInput(evt) {
   console.log(formData);
 }
 //2.
+// function populateTextarea() {
+//   try {
+//     const savedMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+//     refs.emailInput.value = savedMessage.email;
+//     refs.messageTextarea.value = savedMessage.message;
+//   } catch (error) {
+//     console.log(error.name); // "SyntaxError"
+//     console.log(error.message); // "Unexpected token u in JSON at position 1"
+//   }
+// }
+//--------------------------------------------
 function populateTextarea() {
-  // try {
-  //   const savedMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  //   //   if (savedMessage) {
-  //   refs.emailInput.value = savedMessage.email;
-  //   refs.messageTextarea.value = savedMessage.message;
-  //   //   }
-  // } catch (error) {
-  //   console.log(error.name); // "SyntaxError"
-  //   console.log(error.message); // "Unexpected token u in JSON at position 1"
-  // }
-  //-------------------
-  //  // const savedMessage = localStorage.getItem(STORAGE_KEY);
   const savedMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
   if (savedMessage) {
-    console.log(savedMessage);
     refs.emailInput.value = savedMessage.email;
     refs.messageTextarea.value = savedMessage.message;
   }
-  //--------------------------------------------
 }
-//3.
+
 function onFormSubmit(evt) {
   evt.preventDefault();
+  if (refs.emailInput.value === '' || refs.messageTextarea.value === '') {
+    return alert('Все поля должны быть заполнены');
+  }
+  console.log('Отправляем форму');
   console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
-  //   console.log('Отправляем форму');
 
   evt.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
