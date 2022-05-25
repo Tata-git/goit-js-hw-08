@@ -24,30 +24,29 @@ function onTextareaInput(evt) {
   formData[evt.target.name] = evt.target.value;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 
-  console.log(formData); // {name: 'Анонимус', message: 'м'}
+  console.log(formData);
 }
 //2.
 function populateTextarea() {
-  //-------------------
-  //   //   const savedMessage = localStorage.getItem(STORAGE_KEY);
+  // try {
   //   const savedMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
-
-  //   if (savedMessage) {
-  //     console.log(savedMessage);
-  //     refs.emailInput.value = savedMessage.email;
-  //     refs.messageTextarea.value = savedMessage.message;
-  //   }
-  //--------------------------------------------
-  try {
-    const savedMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    //   if (savedMessage) {
+  //   //   if (savedMessage) {
+  //   refs.emailInput.value = savedMessage.email;
+  //   refs.messageTextarea.value = savedMessage.message;
+  //   //   }
+  // } catch (error) {
+  //   console.log(error.name); // "SyntaxError"
+  //   console.log(error.message); // "Unexpected token u in JSON at position 1"
+  // }
+  //-------------------
+  //  // const savedMessage = localStorage.getItem(STORAGE_KEY);
+  const savedMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if (savedMessage) {
+    console.log(savedMessage);
     refs.emailInput.value = savedMessage.email;
     refs.messageTextarea.value = savedMessage.message;
-    //   }
-  } catch (error) {
-    console.log(error.name); // "SyntaxError"
-    console.log(error.message); // "Unexpected token u in JSON at position 1"
   }
+  //--------------------------------------------
 }
 //3.
 function onFormSubmit(evt) {

@@ -1,34 +1,42 @@
 import Player from '@vimeo/player';
-
-const throttle = require('lodash.throttle'); // 1000
+import throttle from 'lodash.throttle';
+// const throttle = require('lodash.throttle'); // 1000
 const STORAGE_KEY = 'videoplayer-current-time';
 //--3---------------------------------------------------------
 const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
 
-player.on('play', function () {
-  console.log('played the video!');
-});
+// player.on('play', function () {
+//   console.log('played the video!');
+// });
 
-player.getVideoTitle().then(function (title) {
-  console.log('title:', title);
-});
+// player.getVideoTitle().then(function (title) {
+//   console.log('title:', title);
+// });
 
 //--4.----------------------------------------------------
 // Разбери документацию метода on() и начни отслеживать событие timeupdate - обновление времени воспроизведения.
 const onPlay = function (data) {
+  // console.log('played the video!');
+  
+    // duration: 61.857;
+    // percent: 0.049;
+    // seconds: 3.034;
+  
   // data is an object containing properties specific to that event
   // data — это объект, содержащий свойства, специфичные для этого события
 };
 
 player.on('play', onPlay);
-// player.on('eventName', function (data) {
-player.on('timeupdate', function (data) {
-  // data is an object containing properties specific to that event
-});
+// 7.  сделай так, чтобы время воспроизведения обновлялось в хранилище не чаще чем раз в секунду.
+
+//------ player.on('eventName', function (data) {
+// data is an object containing properties specific to that event
+
+// });-------
+player.on('timeupdate', throttle(onPlay, 1000));
 
 // 5.Сохраняй время воспроизведения в локальное хранилище. Пусть ключом для хранилища будет строка "videoplayer-current-time".
-// 7.  сделай так, чтобы время воспроизведения обновлялось в хранилище не чаще чем раз в секунду.
 
 // function updatePlaybackTime(evt) {
 //   const playbackTime = evt.target.value;
