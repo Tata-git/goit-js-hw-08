@@ -9,10 +9,7 @@ const onPlay = function (data) {
   // console.log('played the video!');
   const forUpdatePlaybackTime = JSON.stringify(data.seconds);
   localStorage.setItem(STORAGE_KEY, forUpdatePlaybackTime);
-  //---------?--------
-  // duration: 61.857;
-  // percent: 0.049;
-  // seconds: 3.034;
+ 
   console.log(forUpdatePlaybackTime);
 };
 
